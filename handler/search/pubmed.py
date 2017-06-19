@@ -2,9 +2,8 @@
 
 # NCBI/PubMed search handler using URL Requests to PubMed E-Utilities API
 # Full description: https://www.ncbi.nlm.nih.gov/pmc/tools/developers/
-
-__author__ = "Krzysztof Kutt"
-__copyright__ = "Copyright 2017, Krzysztof Kutt"
+#
+# Copyright 2017, Krzysztof Kutt
 
 import re
 import urllib.parse
