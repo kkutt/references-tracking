@@ -58,7 +58,7 @@ def perform_search(query_string):
 
 def dummy_search():
     """
-    Returns exemplary response without querying the PubMed 
+    Returns exemplary response without querying the server 
     :return: string with xml response
     """
     return ('<?xml version="1.0" encoding="UTF-8" ?>\n'
@@ -2922,7 +2922,7 @@ def handle_doc(doc):
 def handle_response(response_text):
     """
     Handles xml response to extract the articles data
-    :param response_text: string with xml response from PubMed 
+    :param response_text: string with xml response 
     :return: nothing
     """
     response = ElementTree.fromstring(response_text)

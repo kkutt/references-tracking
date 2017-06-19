@@ -12,7 +12,7 @@ import urllib.request
 
 def perform_search(query_string):
     """
-    Performs search in PubMed with given query_string
+    Performs search with given query_string
     :param query_string: list of terms to search
     :return: json response with details
     """
@@ -52,13 +52,12 @@ def handle_doc(doc):
         print("DOI: {}".format(doc['dc:identifier']))
     else:
         print("DOI not available")
-    pass
 
 
 def handle_response(response_text):
     """
     Handles json response to extract the articles data
-    :param response_text: string with json response from ScienceDirect 
+    :param response_text: string with json response 
     :return: nothing
     """
     response = json.loads(response_text)
