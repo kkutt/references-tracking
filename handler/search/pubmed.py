@@ -3,6 +3,13 @@
 # NCBI/PubMed search handler using URL Requests to PubMed E-Utilities API
 # Full description: https://www.ncbi.nlm.nih.gov/pmc/tools/developers/
 #
+# Limitations: 3 URL requests per second; large jobs should be limited to
+# weekends or business hours
+# Registration: Free to register (see:
+# https://www.ncbi.nlm.nih.gov/books/NBK25497/#chapter2
+# .Frequency_Timing_and_Registrati); registration is not necessary but strongly
+# encouraged
+#
 # Copyright 2017, Krzysztof Kutt
 
 import re

@@ -12,6 +12,12 @@ import urllib.parse
 import urllib.request
 
 
+def prepare_query_string(keywords="test test2", years=(2000, 2009)):
+    """ Method to be used probably in the future to generate query string 
+    based on given parameters """
+    pass
+
+
 def perform_search(query_string):
     """
     Performs search with given query_string
@@ -34,8 +40,8 @@ def perform_search(query_string):
 
 def handle_doc(doc):
     """
-    Handles the json node representing one document in results
-    :param doc: json node with document data
+    Handles the dictionary representing one document in results
+    :param doc: dictionary with document data
     :return: nothing
     """
     print("Title: {}".format(doc['title']))

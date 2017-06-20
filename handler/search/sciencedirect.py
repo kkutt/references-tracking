@@ -3,6 +3,8 @@
 # ScienceDirect search handler using URL Requests to Search API
 # Full description: https://api.elsevier.com/documentation/SCIDIRSearchAPI.wadl
 #
+# Requires API key registered at https://dev.elsevier.com/apikey/manage
+#
 # Copyright 2017, Krzysztof Kutt
 
 import json
@@ -38,8 +40,8 @@ def dummy_search():
 
 def handle_doc(doc):
     """
-    Handles the json node representing one document in results
-    :param doc: json node with document data
+    Handles the dictionary representing one document in results
+    :param doc: dictionary with document data
     :return: nothing
     """
     print("Title: {}".format(doc['dc:title']))
