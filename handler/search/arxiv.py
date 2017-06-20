@@ -38,7 +38,7 @@ def handle_doc(doc):
     :param doc: xml/atom node with document data
     :return: nothing
     """
-    print("Title: {}".format(doc['title']))
+    print("Title: {}".format(doc['title'].replace('\n', '').replace('\r', '')))
     print("Authors: ", end="")
     for author in doc['authors']:
         print("{}".format(author['name']),

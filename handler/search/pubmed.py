@@ -2944,5 +2944,3 @@ if __name__ == '__main__':
     # response_xml = perform_search(query_string)
     response_xml = dummy_search()
     handle_response(response_xml)
-
-    pass
