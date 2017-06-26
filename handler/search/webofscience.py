@@ -12,13 +12,14 @@ import zeep
 from xml.etree import ElementTree
 
 
-AUTH_URL = "http://search.webofknowledge.com/esti/wokmws/ws" \
+AUTH_URL = "http://search-1webofknowledge-1com-1000029ky0197.wbg2.bg.agh.edu" \
+           ".pl/esti/wokmws/ws" \
            "/WOKMWSAuthenticate?wsdl"
 auth_client = None
 session_id = None
 
 
-def wos_login():
+def wos_login() -> None:
     global auth_client, session_id
     auth_client = zeep.Client(wsdl=AUTH_URL)
     session_id = auth_client.service.authenticate()
@@ -26,14 +27,14 @@ def wos_login():
     pass
 
 
-def wos_logout():
+def wos_logout() -> None:
     global auth_client, session_id
     if auth_client is not None:
         print(auth_client.service.closeSession())
     pass
 
 
-def perform_search(query_string):
+def perform_search(query_string) -> str:
     """
     Performs search in PubMed with given query_string (exemplary query 
     string: 'asthma[mesh] AND leukotrienes[mesh] AND 2009[pdat]')
@@ -77,7 +78,7 @@ def perform_search(query_string):
     pass
 
 
-def handle_doc(doc):
+def handle_doc(doc) -> None:
     """
     Handles the xml node representing one document in results
     :param doc: xml node with document data
@@ -96,7 +97,7 @@ def handle_doc(doc):
     pass
 
 
-def handle_response(response_text):
+def handle_response(response_text) -> None:
     """
     Handles xml response to extract the articles data
     :param response_text: string with xml response 

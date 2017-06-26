@@ -20,7 +20,7 @@ from xml.etree import ElementTree
 DATABASE = 'pubmed'
 
 
-def perform_search(query_string):
+def perform_search(query_string) -> str:
     """
     Performs search in PubMed with given query_string (exemplary query 
     string: 'asthma[mesh] AND leukotrienes[mesh] AND 2009[pdat]')
@@ -63,7 +63,7 @@ def perform_search(query_string):
             return response_xml
 
 
-def dummy_search():
+def dummy_search() -> str:
     """
     Returns exemplary response without querying the server 
     :return: string with xml response
@@ -2908,7 +2908,7 @@ def dummy_search():
             '</eSummaryResult>')
 
 
-def handle_doc(doc):
+def handle_doc(doc) -> None:
     """
     Handles the xml node representing one document in results
     :param doc: xml node with document data
@@ -2926,7 +2926,7 @@ def handle_doc(doc):
         print("DOI not available")
 
 
-def handle_response(response_text):
+def handle_response(response_text) -> None:
     """
     Handles xml response to extract the articles data
     :param response_text: string with xml response 

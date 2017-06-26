@@ -14,7 +14,7 @@ import urllib.request
 import config
 
 
-def perform_search(query_string):
+def perform_search(query_string) -> str:
     """
     Performs search with given query_string
     :param query_string: list of terms to search
@@ -36,7 +36,7 @@ def perform_search(query_string):
     return response_xml
 
 
-def handle_doc(doc):
+def handle_doc(doc) -> None:
     """
     Handles the dictionary representing one document in results
     :param doc: dictionary with document data
@@ -54,7 +54,7 @@ def handle_doc(doc):
         print("DOI not available")
 
 
-def handle_response(response_text):
+def handle_response(response_text) -> None:
     """
     Handles json response to extract the articles data
     :param response_text: string with json response 
