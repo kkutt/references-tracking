@@ -12,33 +12,102 @@ import http.cookiejar
 import urllib.parse
 import urllib.request
 
+import PyQt5
+from PyQt5.QtCore import QUrl
+from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtWebKitWidgets import QWebView, QWebPage
+from PyQt5.QtWebKit import QWebSettings
+from PyQt5.QtNetwork import *
+import sys
+from optparse import OptionParser
+
+
+class MyBrowser(QWebPage):
+    ''' Settings for the browser.'''
+
+    def userAgentForUrl(self, url):
+        ''' Returns a User Agent that will be seen by the website. '''
+        return "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+
+
+class Browser(QWebView):
+    def __init__(self):
+        # QWebView
+        self.view = QWebView.__init__(self)
+        # self.view.setPage(MyBrowser())
+        self.setWindowTitle('Loading...')
+        self.titleChanged.connect(self.adjustTitle)
+        # super(Browser).connect(self.ui.webView,QtCore.SIGNAL("titleChanged (const QString&)"), self.adjustTitle)
+
+    def load(self, url):
+        self.setUrl(QUrl(url))
+
+    def adjustTitle(self):
+        self.setWindowTitle(self.title())
+
+    def disableJS(self):
+        settings = QWebSettings.globalSettings()
+        settings.setAttribute(QWebSettings.JavascriptEnabled, False)
+
+
 if __name__ == '__main__':
-    cj = http.cookiejar.CookieJar()
-    opener = urllib.request.build_opener(
-        urllib.request.HTTPRedirectHandler(),
-        urllib.request.HTTPHandler(debuglevel=0),
-        urllib.request.HTTPSHandler(debuglevel=0),
-        urllib.request.HTTPCookieProcessor(cj)
-    )
-    opener.addheaders = [
-        ('User-agent', ('Mozilla/4.0 (compatible; MSIE 6.0; '
-                        'Windows NT 5.2; .NET CLR 1.1.4322)'))
-    ]
+    app = QApplication(sys.argv)
+    view = Browser()
+    view.show()
+    view.load("http://wbg2.bg.agh.edu.pl/han/science-direct-elsevier/")
+    app.exec_()
 
-    # firstly open the website to go through HTTP Redirection (maybe we
-    # should do this in a loop as long as url is changing)
-    response = opener.open(
-        "http://wbg2.bg.agh.edu.pl/han/science-direct-elsevier/"
-    )
+    # cj = http.cookiejar.CookieJar()
+    # opener = urllib.request.build_opener(
+    #     urllib.request.HTTPRedirectHandler(),
+    #     urllib.request.HTTPHandler(debuglevel=0),
+    #     urllib.request.HTTPSHandler(debuglevel=0),
+    #     urllib.request.HTTPCookieProcessor(cj)
+    # )
+    # opener.addheaders = [
+    #     ('User-agent', ('Mozilla/4.0 (compatible; MSIE 6.0; '
+    #                     'Windows NT 5.2; .NET CLR 1.1.4322)'))
+    # ]
+    #
+    # # firstly open the website to go through HTTP Redirection (maybe we
+    # # should do this in a loop as long as url is changing)
+    # response = opener.open(
+    #     "http://wbg2.bg.agh.edu.pl/han/science-direct-elsevier/"
+    # )
 
-    # show login page to the user and gather the login data
-    import ghost
-    import time
-    g = ghost.Ghost()
-    with g.start(display=True) as gsess:
-        gsess.open("http://wbg2.bg.agh.edu.pl/han/science-direct-elsevier/")
-        gsess.show()
-        time.sleep(10)
+    # # Ghost.py -- nice and simple, but not usable as a part of bigger app
+    # # (dependencies problems...)
+    #
+    # # show login page to the user and gather the login data
+    # import ghost
+    # import time
+    # g = ghost.Ghost()
+    # with g.start(display=False) as gsess:
+    #     #gsess.open("http://wbg2.bg.agh.edu.pl/han/science-direct-elsevier/")
+    #
+    #     # open login page
+    #     page1, res1 = gsess.open("http://ghost-py.readthedocs.io/en/latest/")
+    #
+    #     # wait for page loaded and then show it
+    #     page2, res2 = gsess.wait_for_page_loaded()
+    #
+    #     print(page1.url)
+    #     if page2 is not None:
+    #         print(page2.url)
+    #
+    #     gsess.show()
+    #
+    #     # page is visible as long as it does not change the URL
+    #     # (user do some action, e.g. login by clicking on OK)
+    #     gsess.wait_for(condition=lambda:
+    #                    gsess.page.mainFrame().requestedUrl().toString() !=
+    #                    page1.url,
+    #                    timeout_message="You have 2 minutes to login",
+    #                    timeout=120)
+    #
+    #     print(gsess.page.mainFrame().requestedUrl().toString())
+
+
 
 
 
